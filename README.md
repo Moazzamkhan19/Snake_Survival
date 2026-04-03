@@ -4,4 +4,4 @@ g++ snake.cpp -o snake.exe -IC:\SFML\include -LC:\SFML\lib -lsfml-graphics -lsfm
 
 # TO EXECUTE RUN THIS 
 
-mpiexec -n 4 snake.exe
+mpiexec -n 7 snake.exe
