@@ -34,7 +34,7 @@ const int GRID_ROWS       = 30;
 const int CELL            = 20;
 const int OFFSET_X        = 10;
 const int OFFSET_Y        = 50;
-const int NUM_AI          = 3;
+const int NUM_AI          = 6;
 const float MOVE_INTERVAL = 0.15f;
 const int MAX_SNAKE_LEN   = 900;
 
@@ -71,13 +71,18 @@ bool              gameOver    = false;
 std::string       gameOverMsg = "";
 
 // ─── AI start positions ───────────────────────────────────────────────────────
-const int   AI_SX[NUM_AI]  = { 4,   25,  4  };
-const int   AI_SY[NUM_AI]  = { 4,   4,   25 };
-const Dir   AI_SD[NUM_AI]  = { RIGHT, LEFT, RIGHT };
+const int AI_SX[NUM_AI] = { 4, 25, 4, 25, 14, 4 };
+const int AI_SY[NUM_AI] = { 4,  4, 25, 25,  4, 14 };
+const Dir AI_SD[NUM_AI] = { RIGHT, LEFT, RIGHT, LEFT, RIGHT, RIGHT };
+
+
 sf::Color   AI_COLS[NUM_AI] = {
     sf::Color(220, 70,  70),
     sf::Color(70,  140, 220),
-    sf::Color(220, 190, 50)
+    sf::Color(220, 190, 50),
+    sf::Color(180, 70,  220),
+    sf::Color(220, 50,  150),
+    sf::Color(150, 220, 50),
 };
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -589,10 +594,10 @@ int main(int argc, char* argv[]) {
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
-    if (size != 4) {
+    if (size != 7) {
         if (rank == 0)
-            std::cerr << "ERROR: Run with exactly 4 processes!\n"
-                      << "Use: mpiexec -n 4 snake.exe\n";
+            std::cerr << "ERROR: Run with exactly 7 processes!\n"
+                      << "Use: mpiexec -n 7 snake.exe\n";
         MPI_Finalize();
         return 1;
     }
